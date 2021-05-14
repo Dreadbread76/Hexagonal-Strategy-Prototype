@@ -17,7 +17,8 @@ public class Hex : MonoBehaviour
     public bool attachedRed;
     public bool oddLane;
 
-    [Header("Materials")]
+    [Header("Materials")] 
+    private Renderer rend;
     public Material highlight;
     public Material teamColour;
     public Material selectedColour;
@@ -30,24 +31,25 @@ public class Hex : MonoBehaviour
     public int vertPoint;
     #endregion
     #region Update
+
+    private void Start()
+    {
+        rend = GetComponent<Renderer>();
+    }
     private void Update()
     {
         if (highlighted || movable)
-        {
-            this.GetComponent<Renderer>().material = highlight;
-        }
+            rend.material = highlight;
+        
         else if (selected)
-        {
-            this.GetComponent<Renderer>().material = selectedColour;
-        }
+            rend.material = selectedColour;
+
         else if (attachedRed)
-        {
-            this.GetComponent<Renderer>().material = attachedColour;
-        }
+            rend.material = attachedColour;
+        
         else
-        {
-            this.GetComponent<Renderer>().material = teamColour;
-        }
+            rend.material = teamColour;
+
         
     }
     #endregion
